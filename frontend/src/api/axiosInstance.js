@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+// Automatically detect local development vs deployed environment
+const getApiBaseUrl = () => {
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  if (isLocal) {
+    return import.meta.env.VITE_LOCAL_API_URL || 'http://localhost:5000/api/v1';
+  }
+  return import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || 'https://ticket-booking-backend-2qcd.onrender.com/api/v1';
+};
+
+const BASE_URL = getApiBaseUrl();
 
 // ─── Public Axios Instance (no auth) ─────────────────────────────────────────
 const axiosPublic = axios.create({
@@ -61,5 +70,5 @@ axiosPrivate.interceptors.response.use(
   }
 );
 
-export { axiosPublic, axiosPrivate };
+export { axiosPublic, axiosPrivate, BASE_URL as API_BASE_URL };
 export default axiosPrivate;

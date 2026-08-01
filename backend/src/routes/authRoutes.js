@@ -38,13 +38,19 @@ router.get(
 
 router.get(
   '/google/callback',
-  passport.authenticate('google', { session: false, failureRedirect: `${process.env.CLIENT_URL}/auth/login?error=google_failed` }),
+  (req, res, next) => {
+    const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+    const clientUrl = isLocal ? 'http://localhost:5173' : (process.env.CLIENT_URL || 'https://ticket-booking-frontend-1ola.onrender.com');
+    passport.authenticate('google', { session: false, failureRedirect: `${clientUrl}/auth/login?error=google_failed` })(req, res, next);
+  },
   authController.googleCallback
 );
 
 // Success redirect page (frontend reads user from cookie)
 router.get('/google/success', (req, res) => {
-  res.redirect(`${process.env.CLIENT_URL}/customer/dashboard`);
+  const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+  const clientUrl = isLocal ? 'http://localhost:5173' : (process.env.CLIENT_URL || 'https://ticket-booking-frontend-1ola.onrender.com');
+  res.redirect(`${clientUrl}/customer/dashboard`);
 });
 
 // ─── Protected Routes (require valid JWT cookie) ──────────────────────────────

@@ -43,8 +43,10 @@ const googleCallback = catchAsync(async (req, res) => {
 
   setTokenCookies(res, accessToken, refreshToken);
 
-  // Redirect to frontend with success
-  res.redirect(`${process.env.CLIENT_URL}/auth/google/success`);
+  // Redirect to frontend with success (local vs global)
+  const isLocal = req.hostname === 'localhost' || req.hostname === '127.0.0.1';
+  const clientUrl = isLocal ? 'http://localhost:5173' : (process.env.CLIENT_URL || 'https://ticket-booking-frontend-1ola.onrender.com');
+  res.redirect(`${clientUrl}/auth/google/success`);
 });
 
 // ─── Refresh Token ────────────────────────────────────────────────────────────

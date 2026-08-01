@@ -1,4 +1,4 @@
-import { axiosPublic, axiosPrivate } from './axiosInstance';
+import { axiosPublic, axiosPrivate, API_BASE_URL } from './axiosInstance';
 
 // ─── Register ─────────────────────────────────────────────────────────────────
 export const registerAPI = (data) =>
@@ -39,5 +39,5 @@ export const updateProfileAPI = (data) =>
 // ─── Google OAuth ─────────────────────────────────────────────────────────────
 // Triggered by redirecting the browser (not an axios call)
 export const initiateGoogleLogin = () => {
-  window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1'}/auth/google`;
+  window.location.href = `${API_BASE_URL}/auth/google`;
 };
