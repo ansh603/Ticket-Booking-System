@@ -9,7 +9,12 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["ticket", "booking", "mern", "express"],
+  "keywords": [
+    "ticket",
+    "booking",
+    "mern",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -36,6 +41,7 @@
     "pdfkit": "^0.14.0",
     "qrcode": "^1.5.4",
     "socket.io": "^4.8.3",
+    "streamifier": "^0.1.1",
     "uuid": "^9.0.1",
     "xss-clean": "^0.1.4"
   },
