@@ -34,7 +34,8 @@ const ensureDefaultAdmin = async () => {
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+    const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://ghansu:ticketapp2026@cluster0.mfyolnz.mongodb.net/ticket-booking?appName=Cluster0';
+    const conn = await mongoose.connect(mongoUri, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });

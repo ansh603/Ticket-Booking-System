@@ -81,21 +81,20 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
-    await connectDB();
-
-    server.listen(PORT, () => {
+    server.listen(PORT, '0.0.0.0', () => {
       console.log('');
       console.log('🎟️  ═══════════════════════════════════════════');
-      console.log(`🚀  Server running on http://localhost:${PORT}`);
+      console.log(`🚀  Server running on port ${PORT}`);
       console.log(`🌍  Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`📡  API Base: http://localhost:${PORT}/api/v1`);
       console.log(`🏥  Health:   http://localhost:${PORT}/api/v1/health`);
       console.log('🎟️  ═══════════════════════════════════════════');
       console.log('');
     });
+
+    await connectDB();
   } catch (error) {
-    console.error('❌ Failed to start server:', error.message);
-    process.exit(1);
+    console.error('❌ Failed during database connection:', error.message);
   }
 };
 
