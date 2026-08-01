@@ -65,6 +65,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/v1', apiRoutes);
+app.use('/', apiRoutes); // Allow API access without /api/v1 prefix (e.g., /auth/google)
 
 // ─── Root Route ───────────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
