@@ -1,5 +1,5 @@
 services:
-  # ── Backend Node.js Express Service ──────────────────────────────────────────
+  # ── Backend Node.js Express Web Service ────────────────────────────────────
   - type: web
     name: ticket-booking-backend
     env: node
@@ -25,12 +25,11 @@ services:
       - key: CLIENT_URL
         sync: false
 
-  # ── Frontend React (Vite) Static Web Site ──────────────────────────────────
+  # ── Frontend React (Vite) Static Site ─────────────────────────────────────
+  # Note: Render static sites are served globally via CDN and must NOT have region or plan.
   - type: web
     name: ticket-booking-frontend
     env: static
-    region: singapore
-    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     routes:
