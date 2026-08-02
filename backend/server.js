@@ -22,6 +22,9 @@ const errorHandler = require('./src/middleware/errorHandler');
 const app = express();
 const server = http.createServer(app);
 
+// ─── Trust Proxy (required for secure cookies behind Render's reverse proxy) ──
+app.set('trust proxy', 1);
+
 // ─── Security Middleware ──────────────────────────────────────────────────────
 app.use(
   helmet({
